@@ -1,0 +1,42 @@
+.about{
+  padding:20px;
+  background-color: white;
+  margin: 100px auto;
+  color:#008000;
+  font-family: cursive;
+
+  font-weight: bold;
+  border-radius: 10px;
+
+}
+.buttons{
+  width: 70%;
+  margin-top: 20px;
+  padding: 10px;
+  font-weight: bold;
+  background: #196419;
+  margin: 20px auto;
+    border-color: #196419;
+  color:white;
+
+}
+form{
+  font-family: cursive;
+}
+.signup input{
+  padding:20px;
+  border-radius: 10px;
+}
+.signup label{
+  color:#196419;}
+
+.signUpSubmit{
+width: fit-content;
+margin: auto;
+color:white;
+background:#196419;
+border-color:#19641900;
+
+border-radius: 10px;
+font-size: 20px;
+}
