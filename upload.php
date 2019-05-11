@@ -35,17 +35,54 @@ if(isset($_POST['submit'])){
     $courseInstructor=$_POST['courseInstructor'];
     //echo $courseInstructor;
   }
-
+//if no error
   if(!array_filter($errors)){
     //$_FILES to get the basic information about the uploaded file
-    $file=$_FILES['file'];
-    print_r($file);
+    $file=$_FILES['file'];//'file ' is the name of input fiels used to upload file
+    print_r($file);//print all information about file
     $fileName=$file['name'];//extract file name
-    $fileType=$file['type'];
+    $fileType=$file['type'];//file type
     $fileTmp=$file['tmp_name'];
-    $fileSize=$file['size'];
-    $fileError=$file['error'];
-    
+    $fileSize=$file['size'];//file size
+    $fileError=$file['error'];//if there is error stop uploading the file
+     //now , determine which file allowed to be uploaded to website
+     // allow images, word and pdf
+     //-------------------
+     $fileExt=explode('.',$fileName);//explode the extension of fileName
+     //echo $fileExt[0];
+     $actualFileExt=strtolower(end($fileExt));//make the extension lower case
+     $allowed=array('jpg','jpeg','png','pdf','ppt','doc','docx');
+     //now  CHECK IF THE FILE IS ACTUALLY ALLOWED
+     if(in_array($actualFileExt,$allowed)){
+       //IF THE EXTENSION INSIDE THE ARRAY
+       if($fileError===0){
+         //IF THERE NO ERROR UPLOADING FILE
+         //check the size of the file
+         if($fileSize<1000000){
+           $fileDestination='uploads/'.$fileExt[0].'.'.$actualFileExt;
+           //move the file from temp location to actual location
+           //function move_uploaded_file('temp location','actual location')
+           move_uploaded_file($fileTmp,$fileDestination);
+           
+
+
+         }
+         else{
+           echo "your file is too big!!";
+         }
+
+
+       }
+       else{
+         //echo error
+         echo "There was an error uploading your file!!";
+       }
+
+     }
+     else{
+       //error message
+       echo "you cant upload file of this type";
+     }
 
 
   }
