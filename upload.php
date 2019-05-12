@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
   if(!array_filter($errors)){
     //$_FILES to get the basic information about the uploaded file
     $file=$_FILES['file'];//'file ' is the name of input fiels used to upload file
-    print_r($file);//print all information about file
+    //print_r($file);//print all information about file
     $fileName=$file['name'];//extract file name
     $fileType=$file['type'];//file type
     $fileTmp=$file['tmp_name'];
@@ -63,7 +63,17 @@ if(isset($_POST['submit'])){
            //move the file from temp location to actual location
            //function move_uploaded_file('temp location','actual location')
            move_uploaded_file($fileTmp,$fileDestination);
-           
+           //NOW INSERT THE ROW TO DATABASE
+           $courseName=mysqli_real_escape_string($conn,$_POST['courseName']);
+           $courseInstructor=mysqli_real_escape_string($conn,$_POST['courseInstructor']);
+           $fileType=mysqli_real_escape_string($conn,$_POST['fileType']);
+           //write sql
+           $sql="INSERT INTO files(firstName,lastName,fileType,courseName,instructorName,fileDir) VALUES('$firstName','$lastName','$fileType','$courseName','$courseInstructor','$fileDestination')";
+           if(mysqli_query($conn,$sql)){
+             //
+
+           }
+
 
 
          }
