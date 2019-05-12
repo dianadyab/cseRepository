@@ -12,7 +12,7 @@ mysqli_free_result($result);
  ?>
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
-  <?php include('templates/headerMain.php') ?>
+  <?php include('templates/uploadHeader.php') ?>
   <div class="signup" style="width:50%;margin:60px auto;">
     <form class="form-horizontal" action="download.php" method="post" >
 

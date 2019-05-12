@@ -1,5 +1,6 @@
 <?php
 session_start();
+$message="";
 $errors=['courseName'=>'','courseInstructor'=>'','file'=>''];
 $courseName=$courseInstructor=$fileType=$file="";
 $firstName=$lastName="";
@@ -70,7 +71,8 @@ if(isset($_POST['submit'])){
            //write sql
            $sql="INSERT INTO files(firstName,lastName,fileType,courseName,instructorName,fileDir) VALUES('$firstName','$lastName','$fileType','$courseName','$courseInstructor','$fileDestination')";
            if(mysqli_query($conn,$sql)){
-             //
+
+             $message="upload success";
 
            }
 
@@ -78,20 +80,20 @@ if(isset($_POST['submit'])){
 
          }
          else{
-           echo "your file is too big!!";
+           $message= "your file is too big!!";
          }
 
 
        }
        else{
          //echo error
-         echo "There was an error uploading your file!!";
+         $message= "There was an error uploading your file!!";
        }
 
      }
      else{
        //error message
-       echo "you cant upload file of this type";
+       $message= "you cant upload file of this type";
      }
 
 
@@ -102,7 +104,7 @@ if(isset($_POST['submit'])){
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <?php include('templates/headerMain.php'); ?>
+  <?php include('templates/uploadHeader.php'); ?>
   <div class="signup" style="width:50%;margin:60px auto;">
     <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
 
@@ -157,6 +159,10 @@ if(isset($_POST['submit'])){
 
           <div class=" submit  " style="width:30%;margin:40px auto;padding:10px;" >
             <input class="signUpSubmit" type="submit" name="submit" value="UPLOAD"  >
+          </div>
+
+          <div class="">
+            <?php echo $message; ?>
           </div>
 
     </form>
