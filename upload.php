@@ -9,7 +9,7 @@ if(!isset($_SESSION['email'])){
 else{
   $email=$_SESSION['email'];
   include('config/dbConfig.php');
-  $sql="SELECT * FROM student WHERE email='$email'";
+  $sql= "SELECT * FROM student WHERE email = '$email' ";
   $result=mysqli_query($conn,$sql);
 $student=mysqli_fetch_assoc($result);
 
@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
     $file=$_FILES['file'];//'file ' is the name of input fiels used to upload file
     //print_r($file);//print all information about file
     $fileName=$file['name'];//extract file name
-    $fileType=$file['type'];//file type
+    $fileTypes=$file['type'];//file type
     $fileTmp=$file['tmp_name'];
     $fileSize=$file['size'];//file size
     $fileError=$file['error'];//if there is error stop uploading the file
